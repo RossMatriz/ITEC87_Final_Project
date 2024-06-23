@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Restaurant Menu</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: url('bg.jpg');
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap; /* Allow buttons to wrap to a new line if needed */
+        margin-bottom: 20px;
+        position: fixed;
+        width: 100%; /* Ensure the container spans the full width */
+        z-index: 1000; /* Ensure the buttons stay on top */
+        padding: 10px 0; /* Add some padding for better spacing */
+    }
+
+    .button {
+        padding: 10px 20px; /* Adjusted padding for better fit */
+        background-color: #FFD700;
+        color: #333;
+        border: 2px solid #FFD700;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        margin: 5px; /* Reduced margin for better fit */
+        background-image: linear-gradient(to bottom right, #FFD700, #FFDF83);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 18px; /* Adjusted font size for better fit */
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        outline: 3px solid;
+        outline-color: black;
+        flex: 1 1 20%; /* Adjust flex properties to ensure buttons fit and wrap properly */
+        text-align: center; /* Ensure text is centered */
+    }
+
+    .button:hover {
+        background-image: linear-gradient(to bottom right, #FFCC00, green);
+        transform: translateY(-2px);
+    }
+
+    #main-dish, #vegetables, #dessert, #drinks, #add-ons {
+        padding: 20px;
+        text-align: center;
+        margin-bottom: 50px;
+        padding-top: 90px;
+        border-radius: 60%;
+    }
+
+    #main-dish { background-color: #c5fcfc; }
+    #vegetables { background-color: #e9fcae; }
+    #dessert { background-color: #FFC0CB; }
+    #drinks { background-color: #ADD8E6; }
+    #add-ons { background-color: #f5d6ab; }
+
+    #main-dish h1, #vegetables h1, #dessert h1, #drinks h1, #add-ons h1 {
+        font-size: 40px;
+        margin-bottom: 20px;
+        font-family: 'Gill Sans MT';
+    }
+
+    #main-dish h1 { color: #FF4500; }
+    #vegetables h1 { color: #008000; }
+    #dessert h1 { color: #800080; }
+    #drinks h1 { color: #4169E1; }
+    #add-ons h1 { color: #FFA500; }
+
+    #main-dish p, #vegetables p, #dessert p, #drinks p, #add-ons p {
+        margin: 5px 0;
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+    #menu h1 {
+        font-size: 40px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    #orders {
+        background-color: #f0deaf;
+        padding: 20px;
+        padding-top: 20px;
+        text-align: center;
+        border-radius: 10px;
+        width: 500px;
+        height: auto;
+        z-index: 999;
+        margin: 0 auto;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 20px;
+    }
+
+    #orders button {
+        background-color: #D9EDBF;
+        text-align: center;
+        width: 500px;
+        height: auto;
+        z-index: 999;
+        margin: 0 auto;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 20px;
+    }
+
+    img {
+        width: 350px;
+        height: auto;
+        margin-bottom: 10px;
+        outline: 5px solid;
+        outline-color: green;
+        border-radius: 20%;
+    }
+
+    #menu h1 {
+        color: white;
+        font-size: 60px;
+        -webkit-text-stroke: 2px tomato;
+        padding-top: 50px;
+        font-family: 'Cooper';
+    }
+
+    .clicked-image {
+        border: 10px solid red;
+    }
+
+    #orders h1 {
+        color: black;
+        font-size: 40px;
+        font-family: 'Gill Sans MT';
+        margin-bottom: 20px;
+    }
+</style>
+</head>
+<body>
+
+<div class="button-container">
+    <button class="button" onclick="scrollToSection('main-dish')">Main Dishes</button>
+    <button class="button" onclick="scrollToSection('vegetables')">Vegetables</button>
+    <button class="button" onclick="scrollToSection('dessert')">Desserts</button>
+    <button class="button" onclick="scrollToSection('drinks')">Drinks</button>
+    <button class="button" onclick="scrollToSection('add-ons')">Add-ons</button>
+    <button class="button" onclick="scrollToSection('orders')">Orders</button>
+	<a href="index.html" class="button">Back to Home Page</button>
+</div>
+<br>
+<div id="menu">
+<h1>Ross' Restaurant Menu </h1>
+</div>
+<br>
+
+<div id="main-dish">
+    <h1><u>MAIN DISHES</u></h1>
+    <p style="font-family: 'Tahoma'"><u>CLICK THE IMAGE TO ADD AN ORDER</u></p>
+    <p><b>1. Adobo</b></p>
+    <img src="adobo.jpeg" alt="Adobo" onclick="addToOrder('Adobo', 150.00), toggleImageBorder(this)">
+    <p>Php 150.00 per order</p><br><br>
+    <p><b>2. Menudo</b></p>
+    <img src="menudo.jpeg" alt="Menudo" onclick="addToOrder('Menudo', 180.00), toggleImageBorder(this)">
+    <p>Php 180.00 per order</p><br><br>
+    <p><b>3. Sinigang</b></p>
+    <img src="sinigang.jpeg" alt="Sinigang" onclick="addToOrder('Sinigang', 190.00), toggleImageBorder(this)">
+    <p>Php 190.00 per order</p><br><br>
+    <p><b>4. Beef Steak</b></p>
+    <img src="beefsteak.jpeg" alt="Steak" onclick="addToOrder('Beef Steak', 220.00), toggleImageBorder(this)">
+    <p>Php 220.00 per order</p><br><br>
+    <p><b>5. Sweet & Sour</b></p>
+    <img src="sweetnsour.jpeg" alt="SweetnSour" onclick="addToOrder('Sweet & Sour', 180.00), toggleImageBorder(this)">
+    <p>Php 180.00 per order</p><br><br>
+</div>
+
+<div id="vegetables">
+    <h1><u>VEGETABLES</u></h1>
+    <p style="font-family: 'Tahoma'"><u>CLICK THE IMAGE TO ADD AN ORDER</u></p>
+    <p><b>1. Chop-suey</b></p>
+    <img src="chopsuey.jpeg" alt="Chopsuey" onclick="addToOrder('Chopsuey', 140.00), toggleImageBorder(this)">
+    <p>Php 140.00 per order</p><br><br>
+    <p><b>2. Kare-kare</b></p>
+    <img src="karekare.jpeg" alt="Karekare" onclick="addToOrder('Kare-kare', 160.00), toggleImageBorder(this)">
+    <p>Php 160.00 per order</p><br><br>
+    <p><b>3. Pinakbet</b></p>
+    <img src="pinakbet.jpeg" alt="Pinakbet" onclick="addToOrder('Pinakbet', 140.00), toggleImageBorder(this)">
+    <p>Php 140.00 per order</p><br><br>
+</div>
+
+<div id="dessert">
+    <h1><u>DESSERTS</u></h1>
+    <p style="font-family: 'Tahoma'"><u>CLICK THE IMAGE TO ADD AN ORDER</u></p>
+    <p><b>1. Halo-halo</b></p>
+    <img src="halohalo.jpeg" alt="Halohalo" onclick="addToOrder('Halo-halo', 85.00), toggleImageBorder(this)">
+    <p>Php 85.00 per order</p><br><br>
+    <p><b>2. Maja Blanca</b></p>
+    <img src="maja.jpeg" alt="Maja" onclick="addToOrder('Maja Blanca', 100.00), toggleImageBorder(this)">
+    <p>Php 100.00 per order</p><br><br>
+    <p><b>3. Bibingka</b></p>
+    <img src="bibingka.jpeg" alt="Bibingka" onclick="addToOrder('Bibingka', 120.00), toggleImageBorder(this)">
+    <p>Php 120.00 per order</p><br><br>
+</div>
+
+<div id="drinks">
+    <h1><u>DRINKS</u></h1>
+    <p style="font-family: 'Tahoma'"><u>CLICK THE IMAGE TO ADD AN ORDER</u></p>
+    <p><b>1. Buko juice</b></p>
+    <img src="bukojuice.jpeg" alt="Bukojuice" onclick="addToOrder('Buko juice', 60.00), toggleImageBorder(this)">
+    <p>Php 60.00 per order</p><br><br>
+    <p><b>2. Iced Tea</b></p>
+    <img src="icedtea.jpeg" alt="Icedtea" onclick="addToOrder('Iced Tea', 70.00), toggleImageBorder(this)">
+    <p>Php 70.00 per order</p><br><br>
+    <p><b>3. Blue Lemonade</b></p>
+    <img src="lemonade.jpeg" alt="Lemonade" onclick="addToOrder('Blue Lemonade', 70.00), toggleImageBorder(this)">
+    <p>Php 70.00 per order</p><br><br>
+</div>
+
+<div id="add-ons">
+    <h1><u>ADD-ONS</u></h1>
+    <p style="font-family: 'Tahoma'"><u>CLICK THE IMAGE TO ADD AN ORDER</u></p>
+    <p><b>1. Nachos</b></p>
+    <img src="nachos.jpeg" alt="Nachos" onclick="addToOrder('Nachos', 120.00), toggleImageBorder(this)">
+    <p>Php 120.00 per order</p><br><br>
+    <p><b>2. French Fries</b></p>
+    <img src="fries.jpeg" alt="Fries" onclick="addToOrder('French Fries', 130.00), toggleImageBorder(this)">
+    <p>Php 130.00 per order</p><br><br>
+    <p><b>3. Pancakes</b></p>
+    <img src="pancake.jpeg" alt="Pancake" onclick="addToOrder('Pancakes', 100.00), toggleImageBorder(this)">
+    <p>Php 100.00 per order</p><br><br>
+</div>
+
+<div id="orders">
+    <h1><u>ORDERS</u></h1>
+    <button onclick="clearOrders()">Clear Orders</button>
+    <p id="total-price" style="font-size: 20px; font-weight: bold; color: red;">Total Price: Php 0.00</p>
+    <button onclick="placeOrder()">Place Order</button>
+    <p id="order-confirmation" style="font-size: 20px; font-weight: bold; color: green;"></p>
+</div>
+
+<script>
+function scrollToSection(sectionId) {
+    var section = document.getElementById(sectionId);
+    if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+var orders = {};
+
+function addToOrder(itemName, itemPrice) {
+    if (!orders[itemName]) {
+        orders[itemName] = { price: itemPrice, quantity: 0 };
+    }
+    orders[itemName].quantity++;
+    updateOrders();
+}
+
+function updateOrders() {
+    var ordersDiv = document.getElementById('orders');
+    ordersDiv.innerHTML = '<h1><u>ORDERS</u></h1><button onclick="clearOrders()">Clear Orders</button><p id="total-price" style="font-size: 20px; font-weight: bold; color: red;">Total Price: Php 0.00</p><button onclick="placeOrder()">Place Order</button><p id="order-confirmation" style="font-size: 20px; font-weight: bold; color: green;"></p>';
+    var totalPrice = 0;
+
+    for (var itemName in orders) {
+        if (orders.hasOwnProperty(itemName)) {
+            var item = orders[itemName];
+            var orderItem = document.createElement('p');
+            orderItem.innerHTML = itemName + ': Php ' + item.price.toFixed(2) + ' x ' + item.quantity + ' = Php ' + (item.price * item.quantity).toFixed(2) + ' <button onclick="removeOrder(\'' + itemName + '\')">Remove</button>';
+            ordersDiv.appendChild(orderItem);
+            totalPrice += item.price * item.quantity;
+        }
+    }
+
+    var totalElement = document.getElementById('total-price');
+    if (totalElement) {
+        totalElement.textContent = 'Total Price: Php ' + totalPrice.toFixed(2);
+    }
+}
+
+function removeOrder(itemName) {
+    if (orders[itemName]) {
+        orders[itemName].quantity--;
+        if (orders[itemName].quantity <= 0) {
+            delete orders[itemName];
+        }
+        updateOrders();
+    }
+}
+
+function clearOrders() {
+    orders = {};
+    updateOrders();
+}
+
+function toggleImageBorder(image) {
+    image.classList.toggle('clicked-image');
+    setTimeout(function() {
+        image.classList.remove('clicked-image');
+    }, 100);
+}
+
+function placeOrder() {
+    if (Object.keys(orders).length > 0) {
+        clearOrders();
+        document.getElementById('order-confirmation').innerText = "Order placed successfully!";
+    } else {
+        document.getElementById('order-confirmation').innerText = "No items to order.";
+    }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Store Item Management</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #a40e0e;
+    }
+    .item {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .item img {
+      width: 100%;
+      max-width: 200px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    .item h2 {
+      text-align: center;
+      margin-top: 10px;
+      color: #a40e0e;
+    }
+    .item p {
+      text-align: center;
+    }
+    .item input {
+      width: 50px;
+      text-align: center;
+    }
+    .button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #a40e0e;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .button:hover {
+      background-color: #870c0c;
+    }
+  </style>
+</head>
+<body>
+
+  <p style="text-align: center; margin-top: 20px;">
+    <a href="Store.html" class="button">Go to the Store Page</a>
+  </p>
+<div class="container">
+  <h1>Store Item Management</h1>
+
+  <div id="items-container">
+  </div>
+
+</div>
+
+<script>
+  const itemsData = [
+    {
+      id: 'tshirt1',
+      name: 'Gray T-Shirt 1',
+      image: 'tshirt1.jpg',
+      stock: 1000
+    },
+    {
+      id: 'tshirt2',
+      name: 'Green T-Shirt 2',
+      image: 'tshirt2.jpg',
+      stock: 1000
+    },
+	{
+      id: 'tshirt3',
+      name: 'White Sleeved Shirt 3',
+      image: 'tshirt3.jpg',
+      stock: 1000
+    },
+	{
+      id: 'tshirt4',
+      name: 'Yellow T-Shirt 4',
+      image: 'tshirt4.jpg',
+      stock: 1000
+    },
+    {
+      id: 'perfume1',
+      name: 'Acqua Di Gio Perfume 1',
+      image: 'perfume1.jpg',
+      stock: 1000
+    },
+    {
+      id: 'perfume2',
+      name: 'Shalimar Perfume 2',
+      image: 'perfume2.jpg',
+      stock: 1000
+    },
+    {
+      id: 'perfume3',
+      name: 'Chanel Perfume 3',
+      image: 'perfume3.jpg',
+      stock: 1000
+    },
+    {
+      id: 'perfume4',
+      name: 'Hugo Boss Perfume 4',
+      image: 'perfume4.jpg',
+      stock: 1000
+    },
+    {
+      id: 'sando1',
+      name: 'Macbeth Sando 1',
+      image: 'sando1.jpg',
+      stock: 1000
+    },
+    {
+      id: 'sando2',
+      name: 'Green Sando 2',
+      image: 'sando2.jpg',
+      stock: 1000
+    },
+    {
+      id: 'sando3',
+      name: 'Black Plain Sando 3',
+      image: 'sando3.jpg',
+      stock: 1000
+    },
+    {
+      id: 'sando4',
+      name: 'Blue Plain Sando 4',
+      image: 'sando4.jpg',
+      stock: 1000
+    },
+    {
+      id: 'toy1',
+      name: 'Car Toy 1',
+      image: 'toy1.jpg',
+      stock: 1000
+    },
+    {
+      id: 'toy2',
+      name: 'Construction Toy 2',
+      image: 'toy2.jpg',
+      stock: 1000
+    },
+    {
+      id: 'toy3',
+      name: 'Medical Toy 3',
+      image: 'toy3.jpg',
+      stock: 1000
+    },
+    {
+      id: 'toy4',
+      name: 'Stuffed Toy 4',
+      image: 'toy4.jpg',
+      stock: 1000
+    }
+  ];
+
+  function createItemElement(item) {
+    const itemElement = document.createElement('div');
+    itemElement.classList.add('item');
+    itemElement.innerHTML = `
+      <img src="${item.image}" alt="${item.name}">
+      <h2>${item.name}</h2>
+      <p>Current Stock: <span id="stock-${item.id}">${item.stock}</span></p>
+      <label for="add-stock-${item.id}">Add Stock:</label>
+      <input type="number" id="add-stock-${item.id}" min="1">
+      <button onclick="addStock('${item.id}')">Add Stock</button>
+    `;
+    return itemElement;
+  }
+
+  function renderItems() {
+    const itemsContainer = document.getElementById('items-container');
+    itemsData.forEach(item => {
+      const itemElement = createItemElement(item);
+      itemsContainer.appendChild(itemElement);
+    });
+  }
+
+  function addStock(itemId) {
+    const stockInput = document.getElementById(`add-stock-${itemId}`);
+    const additionalStock = parseInt(stockInput.value);
+    if (!isNaN(additionalStock) && additionalStock > 0) {
+      const currentStock = parseInt(document.getElementById(`stock-${itemId}`).textContent);
+      const newStock = currentStock + additionalStock;
+      document.getElementById(`stock-${itemId}`).textContent = newStock;
+      alert(`Stock for ${itemId} updated successfully. New Stock: ${newStock}`);
+    } else {
+      alert('Please enter a valid stock quantity to add.');
+    }
+    stockInput.value = '';
+  }
+
+  window.onload = function() {
+    renderItems();
+  };
+</script>
+
+</body>
+</html>
